@@ -1,18 +1,17 @@
-import React, {Fragment} from 'react';
-import { Switch } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Switch } from "react-router-dom";
 
-import Route from './Route';
+import Route from "./Route";
 
-import Activities from '../pages/Activities';
+import Activities from "../pages/Activities";
+import Home from "../pages/Home";
 
-function Routes () {
+function Routes() {
   return (
     <Fragment>
       <Switch>
-        <Route
-          path="/"
-          component={Activities}
-        />
+        <Route path="/" component={Home} />
+        <Route path="/activities" component={Activities} />
       </Switch>
     </Fragment>
   );

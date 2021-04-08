@@ -1,12 +1,12 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
 
-import Routes from './routes';
+import Routes from "./routes";
 
 function App() {
   return (
-    <main className="App">
+    <main>
       <BrowserRouter>
-        <Routes/>
+        <Routes />
       </BrowserRouter>
     </main>
   );
