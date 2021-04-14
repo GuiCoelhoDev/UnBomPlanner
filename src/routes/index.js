@@ -10,7 +10,7 @@ function Routes() {
   return (
     <Fragment>
       <Switch>
-        <Route path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/activities" component={Activities} />
       </Switch>
     </Fragment>

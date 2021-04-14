@@ -2,8 +2,8 @@ import React from "react";
 
 import { Container } from "./styles";
 
-function LongButton({ name }) {
-  return <Container>{name}</Container>;
+function LongButton({ children, ...rest }) {
+  return <Container {...rest}>{children}</Container>;
 }
 
 export default LongButton;
