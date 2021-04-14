@@ -4,11 +4,20 @@ const GlobalStyle = createGlobalStyle`
   * { 
     box-sizing: border-box;
     font-family: 'Lato', sans-serif;
+    margin: 0;
   }
 
   body {
-    background-color: #F3ECE3;
+    background: linear-gradient(180deg, #F3ECE3 0%, #ECE7E0 27.59%, #F3E7DB 76.78%);
     margin: 0;
+
+    a {
+      text-decoration: none;
+      color: unset;
+
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      -webkit-tap-highlight-color: transparent;
+    }
 
     main {
       height: 100vh;
@@ -21,26 +30,23 @@ const GlobalStyle = createGlobalStyle`
       width: 100%;
       border-radius: 10px;
       border: 1px solid #B48650;
-    }
 
-    .darker-brown {
-      color: #43382C;
-    }
+      .caption {
+        font-size: 1rem;
+        font-weight: 400;
+        color: ${({ theme }) => theme.darkBrown};
+      }
 
-    .dark-brown {
-      color: #704A1E;
-    }
+      .subtitle {
+        font-size: 1.25rem;
+        font-weight: 300;
+        color: ${({ theme }) => theme.darkBrown};
+      }
 
-    .soft-brown {
-      color: #B48650;
-    }
-
-    .softer-brown {
-      color: #C09C70;
-    }
-
-    .clear-brown {
-      color: #C5A682;
+      .smaller-text {
+        color: ${({ theme }) => theme.darkBrown};
+        font-size: 0.85rem;
+      }
     }
   }
 `;
