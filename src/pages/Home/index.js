@@ -1,14 +1,24 @@
 import React from "react";
 import { Container, SquareButton } from "./styles";
-
+import { useHistory } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import { ReactComponent as Agenda } from "../../assets/Agenda.svg";
 import { ReactComponent as Atividades } from "../../assets/Atividades.svg";
 import { ReactComponent as Disciplinas } from "../../assets/Disciplinas.svg";
 import { ReactComponent as Notas } from "../../assets/Notas.svg";
 import LongButton from "../../components/LongButton";
+import Agenda from "../../assets/Agenda.svg"
+import Atividades from "../../assets/Atividades.svg"
+import Notas from "../../assets/Notas.svg"
+import Disciplinas from "../../assets/Disciplinas.svg"
 
 const Home = () => {
+  const history = useHistory();
+
+  const activities = () => {
+
+    return history.push("/activities")
+  }
   return (
     <Container className="home">
       <Logo className="logo" />
