@@ -1,10 +1,17 @@
 import React from "react";
 import { Container, SquareButton } from "./styles";
-
+import {useHistory} from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import LongButton from "../../components/LongButton";
+import Activities from "../../pages/Activities"
 
 const Home = () => {
+  const history = useHistory();
+
+  const activities = () => {
+    
+    return history.push("/activities")
+  } 
   return (
     <Container className="home">
       <Logo className="logo" />
@@ -13,8 +20,8 @@ const Home = () => {
           <p className="dark-brown">Agenda</p>
         </SquareButton>
 
-        <SquareButton>
-          <p className="dark-brown">Atividades</p>
+        <SquareButton onClick={activities}>
+          <p  className="dark-brown">Atividades</p>
         </SquareButton>
 
         <SquareButton>
