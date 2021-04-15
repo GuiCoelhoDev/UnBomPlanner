@@ -18,6 +18,7 @@ export const Container = styled.section`
 export const Box = styled.article`
 
  border-radius: 10px;
+ background-color: ${props => props.theme.clearBrown}
 
 `;
 
