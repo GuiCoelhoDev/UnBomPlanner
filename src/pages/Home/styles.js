@@ -7,9 +7,9 @@ export const Container = styled.section`
   gap: 0.5rem;
 
   justify-items: center;
-  align-items: center;
+  align-items: center; 
 
-  text-align: center;
+  text-align: center; //REVIEW: Why align only 2020.2?
 
   .logo {
     align-self: end;
