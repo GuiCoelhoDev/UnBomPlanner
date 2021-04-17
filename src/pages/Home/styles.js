@@ -9,7 +9,7 @@ export const Container = styled.section`
   justify-items: center;
   align-items: center; 
 
-  text-align: center; //REVIEW: Why align only 2020.2?
+  text-align: center; //REVIEW: Why this align only 2020.2?
 
   .logo {
     align-self: end;
@@ -38,7 +38,7 @@ export const SquareButton = styled(Link)`
     -6px -6px 16px rgba(255, 254, 252, 0.56);
 
   display: grid;
-  align-content: center;
+  align-content: center; //REVIEW: Why not align-item?
   justify-items: center;
   gap: 0.25rem;
   grid-template-rows: repeat(2, min-content);
