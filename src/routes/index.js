@@ -3,7 +3,7 @@ import { Switch } from "react-router-dom";
 
 import Route from "./Route";
 
-import Activities from "../pages/Activities";
+import Activities from "../pages/Activities_New";
 import Home from "../pages/Home";
 
 function Routes() {
