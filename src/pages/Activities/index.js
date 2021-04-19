@@ -1,45 +1,37 @@
-import React from "react";
-
-
-import { Container, RectangularButton, Box } from "./styles";
-import Theme from "../../assets/styles/ColorsProvider"
-
-
-
+import {
+  Container,
+  ActivitiesBox,
+  ActivitiesContainer
+} from "./styles";
+import { ReactComponent as Agenda } from "../../assets/Agenda.svg";
 
 const Activities = () => {
   return (
-    <Theme>
+    <Container>
+      <nav>
+        {/* Voltar e Atividades */}
+        <p className="subtitle">Atividades</p>
+      </nav>
 
-      <Container>
-        <nav >
-          <p className="subtitle">Atividades</p>
+      <ActivitiesContainer className="today-activities-container">
+        <nav>
+          <p className="activities-title">Atividades de Hoje</p>
+        </nav>
+        <ActivitiesBox>
+
+        </ActivitiesBox>
+      </ActivitiesContainer>
+
+      <ActivitiesContainer className="other-activities-container">
+        <nav>
+          <p className="activities-title">Demais Atividades</p>
         </nav>
 
-
-        <Box className="atividades-container">
-          {/* Atividade 1 */}
-
-          {/* Atividade 2 */}
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <RectangularButton>+ Adicionar Atividade</RectangularButton>
-        </Box>
-        <Box className="atividades-container">
-          {/* Atividade 1 */}
-          {/* Atividade 2 */}
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <p> Tarefa 1</p>
-          <RectangularButton>Adicionar Atividade</RectangularButton>
-        </Box>
-
-      </Container>
-    </Theme>
-
+        <ActivitiesBox>
+            
+        </ActivitiesBox>
+      </ActivitiesContainer>
+    </Container>
   );
 };
 
