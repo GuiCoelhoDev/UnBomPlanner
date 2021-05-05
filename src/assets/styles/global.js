@@ -29,7 +29,29 @@ const GlobalStyle = createGlobalStyle`
       height: 100%;
       width: 100%;
       border-radius: 10px;
-      border: 1px solid #B48650;
+      border: 1px solid ${({ theme }) => theme.softBrown};
+
+      .page-header {
+        width: 100%;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr min-content 1fr;
+
+        .back-link {
+          font-size: 0.95rem;
+          color: ${({ theme }) => theme.softBrown};
+
+          display: grid;
+          grid-template-columns: min-content min-content;
+          align-items: center;
+          gap: 0.35rem;
+
+          svg {
+            height: 1.35rem;
+            width: 1.35rem;
+          }
+        }
+      }
 
       .caption {
         font-size: 1rem;
