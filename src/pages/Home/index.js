@@ -6,12 +6,12 @@ import { ReactComponent as Atividades } from "../../assets/Atividades.svg";
 import { ReactComponent as Disciplinas } from "../../assets/Disciplinas.svg";
 import { ReactComponent as Notas } from "../../assets/Notas.svg";
 import LongButton from "../../components/LongButton";
-
+  
 
 const Home = () => {
 
   return (
-    <Container className="home">
+    <Container>
       <Logo className="logo" />
       <article className="buttons-container">
         <SquareButton className="disabled" to="/">
