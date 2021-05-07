@@ -27,21 +27,20 @@ const Activities = () => {
           <FilterListIcon />
         </nav>
 
-        <div className="activities-box">
+        <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
-                <ListItem
-                  onClick={() => setCheckedBox((c) => !c)}
-                  checked={checkedBox}
-                  key={i}
-                >
-                  <div className="checkbox">
+                <ListItem checked={checkedBox} key={i}>
+                  <div
+                    className="checkbox"
+                    onClick={() => setCheckedBox((c) => !c)}
+                  >
                     <CheckIcon />
                   </div>
-                  <span className="name smaller-text">
+                  <Link to={`/activity/${i}`} className="name smaller-text">
                     Montar telas no Figma
-                  </span>
+                  </Link>
                   <div className="tag">IHC</div>
                 </ListItem>
               ))}
@@ -60,19 +59,23 @@ const Activities = () => {
           <FilterListIcon />
         </nav>
 
-        <div className="activities-box">
+        <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              <ListItem
-                onClick={() => setCheckedBox((c) => !c)}
-                checked={checkedBox}
-              >
-                <div className="checkbox">
-                  <CheckIcon />
-                </div>
-                <span className="name smaller-text">Montar telas no Figma</span>
-                <div className="tag">IHC</div>
-              </ListItem>
+              {[1].map((i) => (
+                <ListItem to={`/activity/${i}`} checked={checkedBox} key={i}>
+                  <div
+                    className="checkbox"
+                    onClick={() => setCheckedBox((c) => !c)}
+                  >
+                    <CheckIcon />
+                  </div>
+                  <Link to={`/activity/${i}`} className="name smaller-text">
+                    Montar telas no Figma
+                  </Link>
+                  <div className="tag">IHC</div>
+                </ListItem>
+              ))}
             </ul>
           </div>
           <div className="add-activity">

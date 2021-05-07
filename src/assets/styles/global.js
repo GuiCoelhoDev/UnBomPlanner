@@ -53,6 +53,19 @@ const GlobalStyle = createGlobalStyle`
         }
       }
 
+      .depth-box {
+        background-color: #efe7de;
+        box-shadow: inset 6px 6px 8px rgba(200, 162, 124, 0.32),
+          inset -6px -6px 16px rgba(255, 254, 252, 0.56);
+        border-radius: 10px;
+      }
+
+      .box-title {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: ${({ theme }) => theme.darkerBrown};
+      }
+
       .caption {
         font-size: 1rem;
         font-weight: 400;
