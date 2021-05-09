@@ -83,12 +83,12 @@ function ShowActivity() {
             </label>
             <input type="text" placeholder="A definir" />
           </div>
-        </div>
-        <div className="textarea-group">
-          <label className="smaller-text">
-            <DescriptionIcon /> Descrição:
-          </label>
-          <textarea />
+          <div className="textarea-group">
+            <label className="smaller-text">
+              <DescriptionIcon /> Descrição:
+            </label>
+            <textarea placeholder="Digite aqui..." />
+          </div>
         </div>
       </ContentContainer>
     </Container>

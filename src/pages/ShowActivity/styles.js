@@ -71,7 +71,7 @@ export const ContentContainer = styled.article`
         padding: 0;
         border-radius: 2px;
         border: none;
-        color: ${({ theme }) => theme.darkBrown};
+        color: ${({ theme }) => theme.darkerBrown};
 
         text-align: center;
 
@@ -107,6 +107,27 @@ export const ContentContainer = styled.article`
           &.is-selected {
             background-color: #faeada;
           }
+        }
+      }
+    }
+
+    .textarea-group {
+      display: grid;
+      gap: 0.5rem;
+
+      textarea {
+        border: 0;
+        background-color: transparent;
+        font-size: 0.8rem;
+        min-height: 8rem;
+        color: ${({ theme }) => theme.darkerBrown};
+
+        &::placeholder {
+          color: ${({ theme }) => theme.clearBrown};
+          font-weight: 300;
+        }
+        &:focus {
+          outline: none;
         }
       }
     }
