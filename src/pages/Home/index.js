@@ -1,15 +1,13 @@
 import React from "react";
 import { Container, SquareButton } from "./styles";
-import { ReactComponent as Logo } from "../../assets/Logo.svg";
-import { ReactComponent as Agenda } from "../../assets/Agenda.svg";
-import { ReactComponent as Atividades } from "../../assets/Atividades.svg";
-import { ReactComponent as Disciplinas } from "../../assets/Disciplinas.svg";
-import { ReactComponent as Notas } from "../../assets/Notas.svg";
+import { ReactComponent as Logo } from "../../assets/svgs/Logo.svg";
+import { ReactComponent as Agenda } from "../../assets/svgs/Agenda.svg";
+import { ReactComponent as Atividades } from "../../assets/svgs/Atividades.svg";
+import { ReactComponent as Disciplinas } from "../../assets/svgs/Disciplinas.svg";
+import { ReactComponent as Notas } from "../../assets/svgs/Notas.svg";
 import LongButton from "../../components/LongButton";
-  
 
 const Home = () => {
-
   return (
     <Container>
       <Logo className="logo" />
@@ -36,9 +34,7 @@ const Home = () => {
       </article>
       <footer>
         <p className="subtitle">2020.2</p>
-        <LongButton className="smaller-text disabled">
-          Gerenciar Semestres
-        </LongButton>
+        <LongButton disabled>Gerenciar Semestres</LongButton>
       </footer>
     </Container>
   );

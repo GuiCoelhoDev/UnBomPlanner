@@ -6,17 +6,6 @@ export const Container = styled.section`
   gap: 1rem;
   justify-items: center;
   padding: 1rem 0.5rem 2rem;
-
-  .activities-title {
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #704a1e;
-  }
-`;
-export const TasksContainer = styled.article`
-  /* display: grid; */
 `;
 
 export const ActivitiesContainer = styled.article`
@@ -46,10 +35,6 @@ export const ActivitiesContainer = styled.article`
     display: grid;
     position: relative;
     width: 90%;
-    background-color: #efe7de;
-    box-shadow: inset 6px 6px 8px rgba(200, 162, 124, 0.32),
-      inset -6px -6px 16px rgba(255, 254, 252, 0.56);
-    border-radius: 10px;
 
     .list-container {
       padding: 1rem 0.75rem 0.5rem;
