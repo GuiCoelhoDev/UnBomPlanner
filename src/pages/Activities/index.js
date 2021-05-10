@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 
 import { Container, ListItem, ActivitiesContainer } from "./styles";
+import SectionHeader from "../../components/SectionHeader";
 
 import { Link } from "react-router-dom";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CheckIcon from "@material-ui/icons/Check";
 import AddIcon from "@material-ui/icons/Add";
 
-const Activities = () => {
+const Activities = ({ history }) => {
   const [checkedBox, setCheckedBox] = useState(false);
   return (
     <Container>
-      <nav className="page-header">
-        <Link to="/" className="back-link">
-          <ArrowBackIcon />
-          Voltar
-        </Link>
-        <p className="subtitle">Atividades</p>
-      </nav>
-
+      <SectionHeader history={history} pageName="Atividades" />
       <ActivitiesContainer>
         <nav>
           <div></div>
@@ -46,9 +39,9 @@ const Activities = () => {
               ))}
             </ul>
           </div>
-          <div className="add-activity">
+          <Link to="/activity/new" className="add-activity">
             <AddIcon /> Adicionar Nova Atividade
-          </div>
+          </Link>
         </div>
       </ActivitiesContainer>
 
@@ -78,9 +71,9 @@ const Activities = () => {
               ))}
             </ul>
           </div>
-          <div className="add-activity">
+          <Link to="/activity/new" className="add-activity">
             <AddIcon /> Adicionar Nova Atividade
-          </div>
+          </Link>
         </div>
       </ActivitiesContainer>
     </Container>

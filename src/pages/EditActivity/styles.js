@@ -6,6 +6,11 @@ export const Container = styled.section`
   gap: 1rem;
   justify-items: center;
   padding: 1rem 0.5rem 2rem;
+
+  .form-button {
+    justify-self: end;
+    margin-right: calc(2.5%);
+  }
 `;
 
 export const ContentContainer = styled.article`
@@ -22,11 +27,26 @@ export const ContentContainer = styled.article`
 
   header {
     display: grid;
-    grid-template-columns: 1fr min-content;
-    align-items: center;
-
-    border-bottom: 2px solid ${({ theme }) => theme.softBrown};
+    border-bottom: 2px dashed ${({ theme }) => theme.softBrown};
     padding-bottom: 0.35rem;
+
+    .title-input {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: ${({ theme }) => theme.darkerBrown};
+
+      background-color: transparent;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: ${({ theme }) => theme.clearBrown};
+        font-weight: 300;
+      }
+    }
 
     svg {
       color: ${({ theme }) => theme.darkBrown};

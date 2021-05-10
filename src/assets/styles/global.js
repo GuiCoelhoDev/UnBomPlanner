@@ -31,28 +31,6 @@ const GlobalStyle = createGlobalStyle`
       border-radius: 10px;
       border: 1px solid ${({ theme }) => theme.softBrown};
 
-      .page-header {
-        width: 100%;
-        display: grid;
-        align-items: center;
-        grid-template-columns: 1fr min-content 1fr;
-
-        .back-link {
-          font-size: 0.95rem;
-          color: ${({ theme }) => theme.softBrown};
-
-          display: grid;
-          grid-template-columns: min-content min-content;
-          align-items: center;
-          gap: 0.35rem;
-
-          svg {
-            height: 1.35rem;
-            width: 1.35rem;
-          }
-        }
-      }
-
       .depth-box {
         background-color: #efe7de;
         box-shadow: inset 6px 6px 8px rgba(200, 162, 124, 0.32),
