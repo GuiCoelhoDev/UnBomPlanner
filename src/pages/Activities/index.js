@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 
+import { Container, ListItem, ActivitiesContainer } from "./styles";
+import SectionHeader from "../../components/SectionHeader";
+
 import { Link } from "react-router-dom";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import CheckIcon from "@material-ui/icons/Check";
 import AddIcon from "@material-ui/icons/Add";
 
 import { index, create } from "../../services/Activities"
 
-import { Container, ListItem, ActivitiesContainer } from "./styles";
-
-const Activities = () => {
-
+const Activities = ({ history }) => {
   const [activities, setActivities] = useState([]);
   const [checkedBox, setCheckedBox] = useState(false);
 
@@ -36,14 +35,7 @@ const Activities = () => {
 
   return (
     <Container>
-      <nav className="page-header">
-        <Link to="/" className="back-link">
-          <ArrowBackIcon />
-          Voltar
-        </Link>
-        <p className="subtitle">Atividades</p>
-      </nav>
-
+      <SectionHeader history={history} pageName="Atividades" />
       <ActivitiesContainer>
         <nav>
           <div></div>
@@ -51,29 +43,28 @@ const Activities = () => {
           <FilterListIcon />
         </nav>
 
-        <div className="activities-box">
+        <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
               {activities?.map((i) => (
-                <ListItem
-                  onClick={() => setCheckedBox((c) => !c)}
-                  checked={checkedBox}
-                  key={i.id}
-                >
-                  <div className="checkbox">
+                <ListItem checked={checkedBox} key={i.id}>
+                  <div
+                    className="checkbox"
+                    onClick={() => setCheckedBox((c) => !c)}
+                  >
                     <CheckIcon />
                   </div>
-                  <span className="name smaller-text">
+                  <Link to={`/activity/${i.id}`} className="name smaller-text">
                     {i.value.name}
-                  </span>
+                  </Link>
                   <div className="tag">IHC</div>
                 </ListItem>
               ))}
             </ul>
           </div>
-          <div className="add-activity" onClick={() => createActivity()}>
+          <Link to="/activity/new" className="add-activity">
             <AddIcon /> Adicionar Nova Atividade
-          </div>
+          </Link>
         </div>
       </ActivitiesContainer>
 
@@ -84,24 +75,28 @@ const Activities = () => {
           <FilterListIcon />
         </nav>
 
-        <div className="activities-box">
+        <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              <ListItem
-                onClick={() => setCheckedBox((c) => !c)}
-                checked={checkedBox}
-              >
-                <div className="checkbox">
-                  <CheckIcon />
-                </div>
-                <span className="name smaller-text">Montar telas no Figma</span>
-                <div className="tag">IHC</div>
-              </ListItem>
+              {[1].map((i) => (
+                <ListItem to={`/activity/${i}`} checked={checkedBox} key={i}>
+                  <div
+                    className="checkbox"
+                    onClick={() => setCheckedBox((c) => !c)}
+                  >
+                    <CheckIcon />
+                  </div>
+                  <Link to={`/activity/${i}`} className="name smaller-text">
+                    Montar telas no Figma
+                  </Link>
+                  <div className="tag">IHC</div>
+                </ListItem>
+              ))}
             </ul>
           </div>
-          <div className="add-activity">
+          <Link to="/activity/new" className="add-activity">
             <AddIcon /> Adicionar Nova Atividade
-          </div>
+          </Link>
         </div>
       </ActivitiesContainer>
     </Container>
