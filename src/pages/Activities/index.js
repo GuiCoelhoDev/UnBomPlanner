@@ -4,7 +4,6 @@ import { Container, ListItem, ActivitiesContainer } from "./styles";
 import SectionHeader from "../../components/SectionHeader";
 
 import { Link } from "react-router-dom";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import CheckIcon from "@material-ui/icons/Check";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -20,7 +19,7 @@ const Activities = ({ history }) => {
   };
 
   const checkActivity = async (id, isChecked) => {
-    const response = await update(id, { checked: isChecked });
+    await update(id, { checked: isChecked });
     fetchActivities();
   };
 
@@ -30,7 +29,7 @@ const Activities = ({ history }) => {
 
   return (
     <Container>
-      <SectionHeader history={history} pageName="Atividades" />
+      <SectionHeader history={history} pageName="Atividades" path="/" />
       <ActivitiesContainer>
         <nav>
           <div></div>
@@ -41,20 +40,33 @@ const Activities = ({ history }) => {
         <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              {activities?.map((a) => (
-                <ListItem checked={a.value.checked} key={a.id}>
-                  <div
-                    className="checkbox"
-                    onClick={() => checkActivity(a.id, !a.value.checked)}
-                  >
-                    <CheckIcon />
-                  </div>
-                  <Link to={`/activity/${a.id}`} className="name smaller-text">
-                    {a.value.name}
-                  </Link>
-                  <div className="tag">{a.value.associatedDiscipline}</div>
-                </ListItem>
-              ))}
+              {todayActivities.length > 0 ? (
+                todayActivities?.map((a) => (
+                  <ListItem checked={a.value.checked} key={a.id}>
+                    <div
+                      className="checkbox"
+                      onClick={() => checkActivity(a.id, !a.value.checked)}
+                    >
+                      <CheckIcon />
+                    </div>
+                    <Link
+                      to={`/activity/${a.id}`}
+                      className="name smaller-text"
+                    >
+                      {a.value.name}
+                    </Link>
+                    {a.value.associatedDiscipline ? (
+                      <div className="tag">
+                        {a?.value?.associatedDiscipline}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                ))
+              ) : (
+                <p className="smaller-text">Não há atividades para hoje :)</p>
+              )}
             </ul>
           </div>
           <Link to="/activity/new" className="add-activity">
@@ -73,20 +85,33 @@ const Activities = ({ history }) => {
         <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              {activities?.map((a) => (
-                <ListItem checked={a.value.checked} key={a.id}>
-                  <div
-                    className="checkbox"
-                    onClick={() => checkActivity(a.id, !a.value.checked)}
-                  >
-                    <CheckIcon />
-                  </div>
-                  <Link to={`/activity/${a.id}`} className="name smaller-text">
-                    {a.value.name}
-                  </Link>
-                  <div className="tag">{a.value.associatedDiscipline}</div>
-                </ListItem>
-              ))}
+              {activities.length > 0 ? (
+                activities?.map((a) => (
+                  <ListItem checked={a?.value?.checked} key={a.id}>
+                    <div
+                      className="checkbox"
+                      onClick={() => checkActivity(a?.id, !a?.value?.checked)}
+                    >
+                      <CheckIcon />
+                    </div>
+                    <Link
+                      to={`/activity/${a?.id}`}
+                      className="name smaller-text"
+                    >
+                      {a?.value?.name}
+                    </Link>
+                    {a.value.associatedDiscipline ? (
+                      <div className="tag">
+                        {a?.value?.associatedDiscipline}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                ))
+              ) : (
+                <p className="smaller-text">Não há nenhuma atividade :)</p>
+              )}
             </ul>
           </div>
           <Link to="/activity/new" className="add-activity">

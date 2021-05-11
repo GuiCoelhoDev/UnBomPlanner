@@ -57,7 +57,11 @@ function NewActivity({ history }) {
           setDescription={setDescription}
         />
       </ContentContainer>
-      <LongButton onClick={() => createActivity()} className="form-button">
+      <LongButton
+        onClick={() => createActivity()}
+        className="form-button"
+        disabled={!name || !submissionDate || !activityType}
+      >
         Salvar Atividade
       </LongButton>
     </Container>
