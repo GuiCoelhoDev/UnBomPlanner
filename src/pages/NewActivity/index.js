@@ -26,6 +26,7 @@ function NewActivity({ history }) {
         description: description,
         checked: false,
       });
+      history.push("/activities");
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +57,11 @@ function NewActivity({ history }) {
           setDescription={setDescription}
         />
       </ContentContainer>
-      <LongButton onClick={() => createActivity()} className="form-button">
+      <LongButton
+        onClick={() => createActivity()}
+        className="form-button"
+        disabled={!name || !submissionDate || !activityType}
+      >
         Salvar Atividade
       </LongButton>
     </Container>

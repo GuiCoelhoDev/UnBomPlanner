@@ -13,16 +13,16 @@ import { ReactComponent as DescriptionIcon } from "../../assets/svgs/Description
 
 function ActivityForm({
   readOnly = false,
-  submissionDate,
-  setSubmissionDate,
-  realizationDate,
-  setRealizationDate,
-  associatedDiscipline,
-  setAssociatedDiscipline,
-  activityType,
-  setActivityType,
-  description,
-  setDescription,
+  submissionDate = "",
+  setSubmissionDate = () => {},
+  realizationDate = "",
+  setRealizationDate = () => {},
+  associatedDiscipline = "",
+  setAssociatedDiscipline = () => {},
+  activityType = "",
+  setActivityType = () => {},
+  description = "",
+  setDescription = () => {},
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
