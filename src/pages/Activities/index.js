@@ -16,14 +16,12 @@ const Activities = ({ history }) => {
 
   const fetchActivities = async () => {
     const response = await index();
-    console.log(response);
     setActivities(response);
   };
 
   const checkActivity = async (id, isChecked) => {
     const response = await update(id, { checked: isChecked });
     fetchActivities();
-    console.log(response);
   };
 
   useEffect(() => {
