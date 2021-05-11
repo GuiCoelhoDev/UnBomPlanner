@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Container, TagOption } from "./styles";
 
@@ -11,12 +11,20 @@ import { ReactComponent as AssociatedDisciplineIcon } from "../../assets/svgs/As
 import { ReactComponent as ActivityTypeIcon } from "../../assets/svgs/ActivityType.svg";
 import { ReactComponent as DescriptionIcon } from "../../assets/svgs/Description.svg";
 
-function ActivityForm({ readOnly = false }) {
+function ActivityForm({
+  readOnly = false,
+  submissionDate,
+  setSubmissionDate,
+  realizationDate,
+  setRealizationDate,
+  associatedDiscipline,
+  setAssociatedDiscipline,
+  activityType,
+  setActivityType,
+  description,
+  setDescription,
+}) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
-
-  const [submission, setSubmission] = useState("");
-  const [realization, setRealization] = useState("");
-  const [selectedType, setSelectedType] = useState("Tarefa");
 
   const formatInputDate = (value) => {
     return value
@@ -34,8 +42,8 @@ function ActivityForm({ readOnly = false }) {
           </label>
           <input
             type="text"
-            value={submission}
-            onChange={(e) => setSubmission(formatInputDate(e.target.value))}
+            value={submissionDate}
+            onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
             placeholder="A definir"
             disabled={readOnly}
           />
@@ -46,8 +54,10 @@ function ActivityForm({ readOnly = false }) {
           </label>
           <input
             type="text"
-            value={realization}
-            onChange={(e) => setRealization(formatInputDate(e.target.value))}
+            value={realizationDate}
+            onChange={(e) =>
+              setRealizationDate(formatInputDate(e.target.value))
+            }
             placeholder="A definir"
             disabled={readOnly}
           />
@@ -60,7 +70,9 @@ function ActivityForm({ readOnly = false }) {
           </label>
           <Dropdown
             controlClassName="select"
-            value={"Nenhuma "}
+            value={associatedDiscipline}
+            placeholder={"Nenhuma"}
+            onChange={setAssociatedDiscipline}
             options={disciplines}
             disabled={readOnly}
           />
@@ -71,29 +83,29 @@ function ActivityForm({ readOnly = false }) {
           </label>
           <TagOption
             className={
-              selectedType === "Tarefa" ? "selected type-option" : "type-option"
+              activityType === "Tarefa" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setSelectedType("Tarefa")}
+            onClick={readOnly ? () => {} : () => setActivityType("Tarefa")}
             tagColor={"#FCBF9C"}
           >
             Tarefa
           </TagOption>
           <TagOption
             className={
-              selectedType === "Prova" ? "selected type-option" : "type-option"
+              activityType === "Prova" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setSelectedType("Prova")}
+            onClick={readOnly ? () => {} : () => setActivityType("Prova")}
             tagColor={"#dcf8a1"}
           >
             Prova
           </TagOption>
           <TagOption
             className={
-              selectedType === "Trabalho"
+              activityType === "Trabalho"
                 ? "selected type-option"
                 : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setSelectedType("Trabalho")}
+            onClick={readOnly ? () => {} : () => setActivityType("Trabalho")}
             tagColor={"#FFF8B6"}
           >
             Trabalho
@@ -107,6 +119,8 @@ function ActivityForm({ readOnly = false }) {
         <textarea
           disabled={readOnly}
           placeholder={readOnly ? "Sem descrição" : "Digite aqui..."}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
     </Container>

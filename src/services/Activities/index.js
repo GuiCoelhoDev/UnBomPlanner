@@ -1,7 +1,7 @@
 import localForage from "localforage";
 
 var activitiesStore = localForage.createInstance({
-  name: "Atividades"
+  name: "Atividades",
 });
 
 /**
@@ -19,7 +19,7 @@ const index = async () => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 /**
  * Cria uma atividade na "base de dados"
@@ -29,16 +29,31 @@ const index = async () => {
  */
 const create = async (data) => {
   try {
-    const { name } = data;
     const keys = await activitiesStore.keys();
     const uniqueID = keys.length > 0 ? Number(keys[keys.length - 1]) + 1 : 1;
-    // TODO: Trocar aqui para salvar o data do objeto somente, e não a concatenação
-    await activitiesStore.setItem(uniqueID, { name: `${name} ${uniqueID}` });
+    await activitiesStore.setItem(uniqueID, data);
     return await activitiesStore.getItem(uniqueID);
   } catch (err) {
     console.log(err);
   }
-}
+};
+
+/**
+ * Modifica uma atividade na "base de dados"
+ *
+ * @param {string} id ID do objeto a ser modificado, e.g: '1'
+ * @param {object} data Objeto com dados da atividade, e.g: {name: 'Atividade'}
+ * @return {object} Retorna o item modificado.
+ */
+const update = async (id, data) => {
+  try {
+    const item = await activitiesStore.getItem(id);
+    await activitiesStore.setItem(id, { ...item, ...data });
+    return await activitiesStore.getItem(id);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 /**
  * Retorna uma atividade da "base de dados"
@@ -53,7 +68,7 @@ const show = async (id) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
 /**
  * Remove uma atividade da "base de dados"
@@ -68,6 +83,6 @@ const destroy = async (id) => {
   } catch (err) {
     console.log(err);
   }
-}
+};
 
-export { index, show, create, destroy }
+export { index, show, create, update, destroy };
