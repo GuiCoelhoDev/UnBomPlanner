@@ -26,6 +26,7 @@ function NewActivity({ history }) {
         description: description,
         checked: false,
       });
+      history.push("/activities");
     } catch (err) {
       console.log(err);
     }
