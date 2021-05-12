@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: grid;
@@ -29,6 +29,28 @@ export const Container = styled.div`
     margin-bottom: 0.5rem;
 
     .input-group {
+      .submission-date-filled {
+        ${({ submissionDateFilled }) => submissionDateFilled ? css`
+      
+          
+      ` :
+    css`
+         border: 2px solid red;
+        
+      `}
+      }
+
+      .realization-date-filled{
+        ${({ realizationDateFilled }) => realizationDateFilled ? css`
+      
+          
+      ` :
+    css`
+        border: 2px solid red;
+        
+      `}
+      }
+
       display: grid;
       grid-template-columns: min-content min-content;
       justify-content: space-between;
@@ -40,7 +62,7 @@ export const Container = styled.div`
         font-size: 0.8rem;
         background-color: #faf3ec;
         padding: 0;
-        border-radius: 2px;
+        border-radius: px;
         border: none;
         color: ${({ theme }) => theme.darkerBrown};
 

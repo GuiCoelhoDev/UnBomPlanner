@@ -13,11 +13,17 @@ function ShowActivity({ history }) {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
+ 
+  const [submissionDateFilled, setSubmissionDateFilled] = useState(true);
+  const [realizationDateFilled, setRealizationDateFilled] = useState(true);
+  
+
 
   const fetchActivity = useCallback(async () => {
     setLoading(true);
     const response = await show(id);
     setData(response);
+
     setLoading(false);
   }, [id]);
 
@@ -43,7 +49,7 @@ function ShowActivity({ history }) {
                 <EditIcon />
               </Link>
             </header>
-            <ActivityForm
+            <ActivityForm submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}
               readOnly={true}
               submissionDate={data?.submissionDate}
               realizationDate={data?.realizationDate}

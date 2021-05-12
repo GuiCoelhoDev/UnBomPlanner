@@ -14,15 +14,17 @@ import { ReactComponent as DescriptionIcon } from "../../assets/svgs/Description
 function ActivityForm({
   readOnly = false,
   submissionDate = "",
-  setSubmissionDate = () => {},
+  setSubmissionDate = () => { },
   realizationDate = "",
-  setRealizationDate = () => {},
+  setRealizationDate = () => { },
   associatedDiscipline = "",
-  setAssociatedDiscipline = () => {},
+  setAssociatedDiscipline = () => { },
   activityType = "",
-  setActivityType = () => {},
+  setActivityType = () => { },
   description = "",
-  setDescription = () => {},
+  setDescription = () => { },
+  submissionDateFilled,
+  realizationDateFilled
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
@@ -34,13 +36,13 @@ function ActivityForm({
       .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
   };
   return (
-    <Container>
+    <Container submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}>
       <div className="inputs-container">
         <div className="input-group">
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
-          <input
+          <input className="submission-date-filled"
             type="text"
             value={submissionDate}
             onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
@@ -53,6 +55,8 @@ function ActivityForm({
             <RealizationDateIcon /> Data de Realização:
           </label>
           <input
+            className="realization-date-filled"
+
             type="text"
             value={realizationDate}
             onChange={(e) =>
@@ -69,6 +73,7 @@ function ActivityForm({
             <AssociatedDisciplineIcon /> Disciplina Associada:
           </label>
           <Dropdown
+            className="associated-discipline-filled"
             controlClassName="select"
             value={associatedDiscipline}
             placeholder={"Nenhuma"}
@@ -85,7 +90,7 @@ function ActivityForm({
             className={
               activityType === "Tarefa" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setActivityType("Tarefa")}
+            onClick={readOnly ? () => { } : () => setActivityType("Tarefa")}
             tagColor={"#FCBF9C"}
           >
             Tarefa
@@ -94,7 +99,7 @@ function ActivityForm({
             className={
               activityType === "Prova" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setActivityType("Prova")}
+            onClick={readOnly ? () => { } : () => setActivityType("Prova")}
             tagColor={"#dcf8a1"}
           >
             Prova
@@ -105,7 +110,7 @@ function ActivityForm({
                 ? "selected type-option"
                 : "type-option"
             }
-            onClick={readOnly ? () => {} : () => setActivityType("Trabalho")}
+            onClick={readOnly ? () => { } : () => setActivityType("Trabalho")}
             tagColor={"#FFF8B6"}
           >
             Trabalho
