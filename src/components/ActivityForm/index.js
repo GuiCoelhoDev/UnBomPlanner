@@ -23,6 +23,9 @@ function ActivityForm({
   setActivityType = () => {},
   description = "",
   setDescription = () => {},
+  submissionDateFilled,
+  realizationDateFilled,
+  titleFilled,
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
@@ -33,14 +36,19 @@ function ActivityForm({
       .replace(/(\/\d{2})(\d{2})/, "$1/$2")
       .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
   };
+
   return (
-    <Container>
+    <Container
+      submissionDateFilled={readOnly ? true : submissionDateFilled}
+      realizationDateFilled={readOnly ? true : realizationDateFilled}
+    >
       <div className="inputs-container">
         <div className="input-group">
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
           <input
+            className="submission-date-filled"
             type="text"
             value={submissionDate}
             onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
@@ -53,6 +61,7 @@ function ActivityForm({
             <RealizationDateIcon /> Data de Realização:
           </label>
           <input
+            className="realization-date-filled"
             type="text"
             value={realizationDate}
             onChange={(e) =>
@@ -69,6 +78,7 @@ function ActivityForm({
             <AssociatedDisciplineIcon /> Disciplina Associada:
           </label>
           <Dropdown
+            className="associated-discipline-filled"
             controlClassName="select"
             value={associatedDiscipline}
             placeholder={"Nenhuma"}
@@ -122,6 +132,12 @@ function ActivityForm({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        {!readOnly &&
+        (!titleFilled || !submissionDateFilled || !realizationDateFilled) ? (
+          <p className="error-message">Preencha os campos indicados.</p>
+        ) : (
+          ""
+        )}
       </div>
     </Container>
   );

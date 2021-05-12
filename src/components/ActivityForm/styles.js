@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: grid;
@@ -55,6 +55,24 @@ export const Container = styled.div`
           outline: none;
           border: 1px solid #ffe7ce;
         }
+
+        &.submission-date-filled {
+          ${({ submissionDateFilled }) =>
+            submissionDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
+
+        &.realization-date-filled {
+          ${({ realizationDateFilled }) =>
+            realizationDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
       }
 
       .select {
@@ -66,6 +84,7 @@ export const Container = styled.div`
           padding-top: 0.1rem;
         }
       }
+
       .Dropdown-menu {
         font-size: 0.8rem;
         border: none;
@@ -95,7 +114,7 @@ export const Container = styled.div`
 
   .textarea-group {
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content 1fr min-content;
     gap: 0.5rem;
 
     textarea {
@@ -112,6 +131,11 @@ export const Container = styled.div`
       &:focus {
         outline: none;
       }
+    }
+
+    .error-message {
+      font-size: 0.7rem;
+      color: #e54a4a;
     }
   }
 `;
