@@ -14,17 +14,18 @@ import { ReactComponent as DescriptionIcon } from "../../assets/svgs/Description
 function ActivityForm({
   readOnly = false,
   submissionDate = "",
-  setSubmissionDate = () => { },
+  setSubmissionDate = () => {},
   realizationDate = "",
-  setRealizationDate = () => { },
+  setRealizationDate = () => {},
   associatedDiscipline = "",
-  setAssociatedDiscipline = () => { },
+  setAssociatedDiscipline = () => {},
   activityType = "",
-  setActivityType = () => { },
+  setActivityType = () => {},
   description = "",
-  setDescription = () => { },
+  setDescription = () => {},
   submissionDateFilled,
-  realizationDateFilled
+  realizationDateFilled,
+  titleFilled,
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
@@ -35,14 +36,19 @@ function ActivityForm({
       .replace(/(\/\d{2})(\d{2})/, "$1/$2")
       .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
   };
+
   return (
-    <Container submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}>
+    <Container
+      submissionDateFilled={readOnly ? true : submissionDateFilled}
+      realizationDateFilled={readOnly ? true : realizationDateFilled}
+    >
       <div className="inputs-container">
         <div className="input-group">
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
-          <input className="submission-date-filled"
+          <input
+            className="submission-date-filled"
             type="text"
             value={submissionDate}
             onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
@@ -56,7 +62,6 @@ function ActivityForm({
           </label>
           <input
             className="realization-date-filled"
-
             type="text"
             value={realizationDate}
             onChange={(e) =>
@@ -90,7 +95,7 @@ function ActivityForm({
             className={
               activityType === "Tarefa" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => { } : () => setActivityType("Tarefa")}
+            onClick={readOnly ? () => {} : () => setActivityType("Tarefa")}
             tagColor={"#FCBF9C"}
           >
             Tarefa
@@ -99,7 +104,7 @@ function ActivityForm({
             className={
               activityType === "Prova" ? "selected type-option" : "type-option"
             }
-            onClick={readOnly ? () => { } : () => setActivityType("Prova")}
+            onClick={readOnly ? () => {} : () => setActivityType("Prova")}
             tagColor={"#dcf8a1"}
           >
             Prova
@@ -110,7 +115,7 @@ function ActivityForm({
                 ? "selected type-option"
                 : "type-option"
             }
-            onClick={readOnly ? () => { } : () => setActivityType("Trabalho")}
+            onClick={readOnly ? () => {} : () => setActivityType("Trabalho")}
             tagColor={"#FFF8B6"}
           >
             Trabalho
@@ -127,6 +132,12 @@ function ActivityForm({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        {!readOnly &&
+        (!titleFilled || !submissionDateFilled || !realizationDateFilled) ? (
+          <p className="error-message">Preencha os campos indicados.</p>
+        ) : (
+          ""
+        )}
       </div>
     </Container>
   );

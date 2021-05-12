@@ -29,28 +29,6 @@ export const Container = styled.div`
     margin-bottom: 0.5rem;
 
     .input-group {
-      .submission-date-filled {
-        ${({ submissionDateFilled }) => submissionDateFilled ? css`
-      
-          
-      ` :
-    css`
-         border: 2px solid red;
-        
-      `}
-      }
-
-      .realization-date-filled{
-        ${({ realizationDateFilled }) => realizationDateFilled ? css`
-      
-          
-      ` :
-    css`
-        border: 2px solid red;
-        
-      `}
-      }
-
       display: grid;
       grid-template-columns: min-content min-content;
       justify-content: space-between;
@@ -62,7 +40,7 @@ export const Container = styled.div`
         font-size: 0.8rem;
         background-color: #faf3ec;
         padding: 0;
-        border-radius: px;
+        border-radius: 2px;
         border: none;
         color: ${({ theme }) => theme.darkerBrown};
 
@@ -77,6 +55,24 @@ export const Container = styled.div`
           outline: none;
           border: 1px solid #ffe7ce;
         }
+
+        &.submission-date-filled {
+          ${({ submissionDateFilled }) =>
+            submissionDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
+
+        &.realization-date-filled {
+          ${({ realizationDateFilled }) =>
+            realizationDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
       }
 
       .select {
@@ -88,6 +84,7 @@ export const Container = styled.div`
           padding-top: 0.1rem;
         }
       }
+
       .Dropdown-menu {
         font-size: 0.8rem;
         border: none;
@@ -117,7 +114,7 @@ export const Container = styled.div`
 
   .textarea-group {
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content 1fr min-content;
     gap: 0.5rem;
 
     textarea {
@@ -134,6 +131,11 @@ export const Container = styled.div`
       &:focus {
         outline: none;
       }
+    }
+
+    .error-message {
+      font-size: 0.7rem;
+      color: #e54a4a;
     }
   }
 `;

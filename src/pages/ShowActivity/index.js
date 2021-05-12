@@ -13,11 +13,6 @@ function ShowActivity({ history }) {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
- 
-  const [submissionDateFilled, setSubmissionDateFilled] = useState(true);
-  const [realizationDateFilled, setRealizationDateFilled] = useState(true);
-  
-
 
   const fetchActivity = useCallback(async () => {
     setLoading(true);
@@ -49,7 +44,7 @@ function ShowActivity({ history }) {
                 <EditIcon />
               </Link>
             </header>
-            <ActivityForm submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}
+            <ActivityForm
               readOnly={true}
               submissionDate={data?.submissionDate}
               realizationDate={data?.realizationDate}

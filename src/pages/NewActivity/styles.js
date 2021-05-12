@@ -26,18 +26,14 @@ export const ContentContainer = styled.article`
   gap: 1rem;
 
   header {
-
-    ${({ titleFilled }) => titleFilled ? css`
-      
-      border-bottom: 2px dashed ${({ theme }) => theme.softBrown};
-      
-
-    ` :
-    css`
-    
-      border-bottom: 2px dashed red;
-    `
-  }
+    ${({ titleFilled }) =>
+      titleFilled
+        ? css`
+            border-bottom: 2px dashed ${({ theme }) => theme.softBrown};
+          `
+        : css`
+            border-bottom: 2px dashed #e54a4a;
+          `}
     display: grid;
     padding-bottom: 0.35rem;
 

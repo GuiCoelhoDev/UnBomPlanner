@@ -19,6 +19,8 @@ function EditActivity({ history }) {
   const [activityType, setActivityType] = useState("Tarefa");
   const [description, setDescription] = useState("");
 
+  const [hasData, setHasData] = useState(false);
+
   //VALIDATIONS
   const [titleFilled, setTitleFilled] = useState(true);
   const [submissionDateFilled, setSubmissionDateFilled] = useState(true);
@@ -31,6 +33,7 @@ function EditActivity({ history }) {
 
     const response = await show(id);
 
+    setHasData(true);
     setName(response?.name);
     setSubmissionDate(response?.submissionDate);
     setRealizationDate(response?.realizationDate);
@@ -42,9 +45,11 @@ function EditActivity({ history }) {
   }, [id]);
 
   const updateActivity = async () => {
+    setTitleFilled(true);
+    setSubmissionDateFilled(true);
+    setRealizationDateFilled(true);
 
-    if (!name || !submissionDate || !activityType) {
-
+    if (!name || !submissionDate || !realizationDate) {
       if (!name) {
         setTitleFilled(false);
       }
@@ -52,13 +57,9 @@ function EditActivity({ history }) {
         setSubmissionDateFilled(false);
       }
       if (!realizationDate) {
-
         setRealizationDateFilled(false);
-
-
       }
-    }
-    else {
+    } else {
       try {
         await update(id, {
           name: name,
@@ -67,7 +68,7 @@ function EditActivity({ history }) {
           associatedDiscipline:
             typeof associatedDiscipline === "string"
               ? associatedDiscipline
-              : associatedDiscipline.value,
+              : associatedDiscipline?.value,
           activityType: activityType,
           description: description,
         });
@@ -88,7 +89,7 @@ function EditActivity({ history }) {
       <ContentContainer titleFilled={titleFilled} className="depth-box">
         {loading ? (
           <></>
-        ) : name ? (
+        ) : hasData ? (
           <>
             <header>
               <input
@@ -98,7 +99,10 @@ function EditActivity({ history }) {
                 placeholder="Título da Atividade"
               />
             </header>
-            <ActivityForm submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}
+            <ActivityForm
+              submissionDateFilled={submissionDateFilled}
+              realizationDateFilled={realizationDateFilled}
+              titleFilled={titleFilled}
               submissionDate={submissionDate}
               setSubmissionDate={setSubmissionDate}
               realizationDate={realizationDate}
@@ -112,14 +116,10 @@ function EditActivity({ history }) {
             />
           </>
         ) : (
-              <p className="smaller-text">Esta atividade não existe :(</p>
-            )}
+          <p className="smaller-text">Esta atividade não existe :(</p>
+        )}
       </ContentContainer>
-      <LongButton
-        onClick={() => updateActivity()}
-        className="form-button"
-        
-      >
+      <LongButton onClick={() => updateActivity()} className="form-button">
         Salvar Atividade
       </LongButton>
     </Container>

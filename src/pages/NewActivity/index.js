@@ -21,8 +21,7 @@ function NewActivity({ history }) {
 
   const createActivity = async () => {
     // Se o name estiver vazio, não quero entrar no try, quero retornar um css e um aviso de que não foi criado?
-    if (!name || !submissionDate || !activityType) {
-
+    if (!name || !submissionDate || !realizationDate) {
       if (!name) {
         setTitleFilled(false);
       }
@@ -30,15 +29,9 @@ function NewActivity({ history }) {
         setSubmissionDateFilled(false);
       }
       if (!realizationDate) {
-
         setRealizationDateFilled(false);
-
-
       }
-    }
-    else {
-
-
+    } else {
       try {
         await create({
           name: name,
@@ -68,7 +61,10 @@ function NewActivity({ history }) {
             placeholder="Título da Atividade"
           />
         </header>
-        <ActivityForm submissionDateFilled={submissionDateFilled} realizationDateFilled={realizationDateFilled}
+        <ActivityForm
+          submissionDateFilled={submissionDateFilled}
+          realizationDateFilled={realizationDateFilled}
+          titleFilled={titleFilled}
           submissionDate={submissionDate}
           setSubmissionDate={setSubmissionDate}
           realizationDate={realizationDate}
