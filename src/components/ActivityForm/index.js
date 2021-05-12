@@ -1,9 +1,13 @@
 import React from "react";
 
-import { Container, TagOption } from "./styles";
+import { Container, TagOption, DateInput } from "./styles";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+
+// import TextField from '@material-ui/core/TextField';
+
+import DatePicker from '../DatePicker';
 
 import { ReactComponent as SubmissionDateIcon } from "../../assets/svgs/SubmissionDate.svg";
 import { ReactComponent as RealizationDateIcon } from "../../assets/svgs/RealizationDate.svg";
@@ -33,6 +37,11 @@ function ActivityForm({
       .replace(/(\/\d{2})(\d{2})/, "$1/$2")
       .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
   };
+
+  function onChange(timestamp) {
+    console.log(timestamp);
+  }
+  
   return (
     <Container>
       <div className="inputs-container">
@@ -40,13 +49,25 @@ function ActivityForm({
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
-          <input
+          {/* <input
             type="text"
             value={submissionDate}
             onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
             placeholder="A definir"
             disabled={readOnly}
-          />
+          /> */}
+          {/* <DateInput
+            id="datetime-local"
+            // label="Next appointment"
+            type="datetime-local"
+            // defaultValue="2017-05-24T10:30"
+            // className={classes.textField}
+            onChange={(e) => {console.log(e.target.value); setSubmissionDate(e.target.value)}}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          /> */}
+          <DatePicker onChange={onChange} />
         </div>
         <div className="input-group">
           <label className="smaller-text">
@@ -61,6 +82,7 @@ function ActivityForm({
             placeholder="A definir"
             disabled={readOnly}
           />
+          
         </div>
       </div>
       <div className="inputs-container">
