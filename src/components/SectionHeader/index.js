@@ -4,10 +4,13 @@ import { Header } from "./styles";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-function SectionHeader({ pageName, history }) {
+function SectionHeader({ pageName, history, path }) {
   return (
     <Header>
-      <span onClick={() => history.goBack()} className="back-link">
+      <span
+        onClick={() => (path ? history.push(path) : history.goBack())}
+        className="back-link"
+      >
         <ArrowBackIcon />
         Voltar
       </span>

@@ -14,27 +14,45 @@ function NewActivity({ history }) {
   const [associatedDiscipline, setAssociatedDiscipline] = useState("");
   const [activityType, setActivityType] = useState("Tarefa");
   const [description, setDescription] = useState("");
+  // Validations
+  const [titleFilled, setTitleFilled] = useState(true);
+  const [submissionDateFilled, setSubmissionDateFilled] = useState(true);
+  const [realizationDateFilled, setRealizationDateFilled] = useState(true);
 
   const createActivity = async () => {
-    try {
-      await create({
-        name: name,
-        submissionDate: submissionDate,
-        realizationDate: realizationDate,
-        associatedDiscipline: associatedDiscipline.value,
-        activityType: activityType,
-        description: description,
-        checked: false,
-      });
-    } catch (err) {
-      console.log(err);
+    // Se o name estiver vazio, não quero entrar no try, quero retornar um css e um aviso de que não foi criado?
+    if (!name || !submissionDate || !realizationDate) {
+      if (!name) {
+        setTitleFilled(false);
+      }
+      if (!submissionDate) {
+        setSubmissionDateFilled(false);
+      }
+      if (!realizationDate) {
+        setRealizationDateFilled(false);
+      }
+    } else {
+      try {
+        await create({
+          name: name,
+          submissionDate: submissionDate,
+          realizationDate: realizationDate,
+          associatedDiscipline: associatedDiscipline.value,
+          activityType: activityType,
+          description: description,
+          checked: false,
+        });
+        history.push("/activities");
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   return (
     <Container>
       <SectionHeader history={history} pageName="Nova Atividade" />
-      <ContentContainer className="depth-box">
+      <ContentContainer titleFilled={titleFilled} className="depth-box">
         <header>
           <input
             value={name}
@@ -44,6 +62,9 @@ function NewActivity({ history }) {
           />
         </header>
         <ActivityForm
+          submissionDateFilled={submissionDateFilled}
+          realizationDateFilled={realizationDateFilled}
+          titleFilled={titleFilled}
           submissionDate={submissionDate}
           setSubmissionDate={setSubmissionDate}
           realizationDate={realizationDate}
@@ -56,7 +77,11 @@ function NewActivity({ history }) {
           setDescription={setDescription}
         />
       </ContentContainer>
-      <LongButton onClick={() => createActivity()} className="form-button">
+      <LongButton
+        onClick={() => createActivity()}
+        className="form-button"
+        disabled={!activityType}
+      >
         Salvar Atividade
       </LongButton>
     </Container>

@@ -15,14 +15,26 @@ const Activities = ({ history }) => {
 
   const fetchActivities = async () => {
     const response = await index();
-    console.log(response);
-    setActivities(response);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0,0,0,0);
+    let tempArray = response.filter((activity) => {
+      return (activity.realizationDate >= today && activity.realizationDate < tomorrow) ||
+       (activity.submissionDate >= today && activity.submissionDate < tomorrow)
+    });
+    let temp2Array = response.filter((activity) => {
+      return !(activity.realizationDate >= today && activity.realizationDate < tomorrow) ||
+       (activity.submissionDate >= today && activity.submissionDate < tomorrow)
+    });
+    setTodayActivities(tempArray);
+    setActivities(temp2Array);
   };
 
   const checkActivity = async (id, isChecked) => {
-    const response = await update(id, { checked: isChecked });
+    await update(id, { checked: isChecked });
     fetchActivities();
-    console.log(response);
   };
 
   useEffect(() => {
@@ -31,7 +43,7 @@ const Activities = ({ history }) => {
 
   return (
     <Container>
-      <SectionHeader history={history} pageName="Atividades" />
+      <SectionHeader history={history} pageName="Atividades" path="/" />
       <ActivitiesContainer>
         <nav>
           <div></div>
@@ -42,20 +54,33 @@ const Activities = ({ history }) => {
         <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              {activities?.map((a) => (
-                <ListItem checked={a.value.checked} key={a.id}>
-                  <div
-                    className="checkbox"
-                    onClick={() => checkActivity(a.id, !a.value.checked)}
-                  >
-                    <CheckIcon />
-                  </div>
-                  <Link to={`/activity/${a.id}`} className="name smaller-text">
-                    {a.value.name}
-                  </Link>
-                  <div className="tag">{a.value.associatedDiscipline}</div>
-                </ListItem>
-              ))}
+              {todayActivities.length > 0 ? (
+                todayActivities?.map((a) => (
+                  <ListItem checked={a.value.checked} key={a.id}>
+                    <div
+                      className="checkbox"
+                      onClick={() => checkActivity(a.id, !a.value.checked)}
+                    >
+                      <CheckIcon />
+                    </div>
+                    <Link
+                      to={`/activity/${a.id}`}
+                      className="name smaller-text"
+                    >
+                      {a.value.name}
+                    </Link>
+                    {a.value.associatedDiscipline ? (
+                      <div className="tag">
+                        {a?.value?.associatedDiscipline}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                ))
+              ) : (
+                <p className="smaller-text">Não há atividades para hoje :)</p>
+              )}
             </ul>
           </div>
           <Link to="/activity/new" className="add-activity">
@@ -74,20 +99,33 @@ const Activities = ({ history }) => {
         <div className="activities-box depth-box">
           <div className="list-container">
             <ul>
-              {activities?.map((a) => (
-                <ListItem checked={a.value.checked} key={a.id}>
-                  <div
-                    className="checkbox"
-                    onClick={() => checkActivity(a.id, !a.value.checked)}
-                  >
-                    <CheckIcon />
-                  </div>
-                  <Link to={`/activity/${a.id}`} className="name smaller-text">
-                    {a.value.name}
-                  </Link>
-                  <div className="tag">{a.value.associatedDiscipline}</div>
-                </ListItem>
-              ))}
+              {activities.length > 0 ? (
+                activities?.map((a) => (
+                  <ListItem checked={a?.value?.checked} key={a.id}>
+                    <div
+                      className="checkbox"
+                      onClick={() => checkActivity(a?.id, !a?.value?.checked)}
+                    >
+                      <CheckIcon />
+                    </div>
+                    <Link
+                      to={`/activity/${a?.id}`}
+                      className="name smaller-text"
+                    >
+                      {a?.value?.name}
+                    </Link>
+                    {a.value.associatedDiscipline ? (
+                      <div className="tag">
+                        {a?.value?.associatedDiscipline}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ListItem>
+                ))
+              ) : (
+                <p className="smaller-text">Não há nenhuma atividade :)</p>
+              )}
             </ul>
           </div>
           <Link to="/activity/new" className="add-activity">

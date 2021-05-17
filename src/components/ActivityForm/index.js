@@ -17,16 +17,19 @@ import { ReactComponent as DescriptionIcon } from "../../assets/svgs/Description
 
 function ActivityForm({
   readOnly = false,
-  submissionDate,
-  setSubmissionDate,
-  realizationDate,
-  setRealizationDate,
-  associatedDiscipline,
-  setAssociatedDiscipline,
-  activityType,
-  setActivityType,
-  description,
-  setDescription,
+  submissionDate = "",
+  setSubmissionDate = () => {},
+  realizationDate = "",
+  setRealizationDate = () => {},
+  associatedDiscipline = "",
+  setAssociatedDiscipline = () => {},
+  activityType = "",
+  setActivityType = () => {},
+  description = "",
+  setDescription = () => {},
+  submissionDateFilled,
+  realizationDateFilled,
+  titleFilled,
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
@@ -43,19 +46,15 @@ function ActivityForm({
   }
 
   return (
-    <Container>
+    <Container
+      submissionDateFilled={readOnly ? true : submissionDateFilled}
+      realizationDateFilled={readOnly ? true : realizationDateFilled}
+    >
       <div className="inputs-container">
         <div className="input-group">
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
-          {/* <input
-            type="text"
-            value={submissionDate}
-            onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
-            placeholder="A definir"
-            disabled={readOnly}
-          /> */}
           <InputDateTime
             value={submissionDate}
             setValue={setSubmissionDate}
@@ -67,6 +66,7 @@ function ActivityForm({
             <RealizationDateIcon /> Data de Realização:
           </label>
           <input
+            className="realization-date-filled"
             type="text"
             value={realizationDate}
             onChange={(e) =>
@@ -84,6 +84,7 @@ function ActivityForm({
             <AssociatedDisciplineIcon /> Disciplina Associada:
           </label>
           <Dropdown
+            className="associated-discipline-filled"
             controlClassName="select"
             value={associatedDiscipline}
             placeholder={"Nenhuma"}
@@ -137,6 +138,12 @@ function ActivityForm({
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        {!readOnly &&
+        (!titleFilled || !submissionDateFilled || !realizationDateFilled) ? (
+          <p className="error-message">Preencha os campos indicados.</p>
+        ) : (
+          ""
+        )}
       </div>
     </Container>
   );
