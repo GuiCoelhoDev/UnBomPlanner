@@ -78,7 +78,7 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
       <input
         type="text"
         placeholder="A definir"
-        onClick={readOnly ? () => {} : () => closeModal()}
+        onClick={readOnly ? () => { } : () => closeModal()}
         value={value ? format(value, "dd/LL 'às' HH':'mm") : ""}
         className={"input-date " + additionalClass}
         readOnly={true}
@@ -93,10 +93,14 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
                 popupIcon={null}
                 options={months}
                 getOptionLabel={(option) => option.label}
-                getOptionSelected={(option, selected) =>
+                getOptionSelected={(option, selected) => 
+
+
                   option.value === selected.value
+                
                 }
                 value={months[selectedMonth - 1]}
+
                 onChange={(e, v) => setSelectedMonth(v.value)}
                 renderInput={(params) => (
                   <TextField {...params} label="Mês" variant="outlined" />
@@ -108,7 +112,12 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
                 options={monthDay(selectedMonth)}
                 getOptionLabel={(option) => option}
                 value={selectedDay}
-                onChange={(e, v) => setSelectedDay(v)}
+                onChange={(e, v) => {
+                  setSelectedDay(v)
+                }}
+                onInputChange={(e, v) => {
+                  setSelectedDay(v);
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label="Dia" variant="outlined" />
                 )}
@@ -120,6 +129,9 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
                 getOptionLabel={(option) => option}
                 value={selectedHour}
                 onChange={(e, v) => setSelectedHour(v)}
+                onInputChange={(e, v) => {
+                  setSelectedHour(v);
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label="Hora" variant="outlined" />
                 )}
@@ -131,6 +143,9 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
                 getOptionLabel={(option) => option}
                 value={selectedMinute}
                 onChange={(e, v) => setSelectedMinute(v)}
+                onInputChange={(e, v) => {
+                  setSelectedMinute(v);
+                }}
                 renderInput={(params) => (
                   <TextField {...params} label="Minuto" variant="outlined" />
                 )}
@@ -140,8 +155,8 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
           </ClickAwayListener>
         </>
       ) : (
-        <></>
-      )}
+          <></>
+        )}
     </>
   );
 }
