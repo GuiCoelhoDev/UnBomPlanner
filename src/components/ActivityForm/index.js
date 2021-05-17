@@ -7,7 +7,7 @@ import "react-dropdown/style.css";
 
 // import TextField from '@material-ui/core/TextField';
 
-import DatePicker from '../DatePicker';
+import InputDateTime from "../InputDateTime";
 
 import { ReactComponent as SubmissionDateIcon } from "../../assets/svgs/SubmissionDate.svg";
 import { ReactComponent as RealizationDateIcon } from "../../assets/svgs/RealizationDate.svg";
@@ -41,7 +41,7 @@ function ActivityForm({
   function onChange(timestamp) {
     console.log(timestamp);
   }
-  
+
   return (
     <Container>
       <div className="inputs-container">
@@ -56,18 +56,11 @@ function ActivityForm({
             placeholder="A definir"
             disabled={readOnly}
           /> */}
-          {/* <DateInput
-            id="datetime-local"
-            // label="Next appointment"
-            type="datetime-local"
-            // defaultValue="2017-05-24T10:30"
-            // className={classes.textField}
-            onChange={(e) => {console.log(e.target.value); setSubmissionDate(e.target.value)}}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          /> */}
-          <DatePicker onChange={onChange} />
+          <InputDateTime
+            value={submissionDate}
+            setValue={setSubmissionDate}
+            readOnly={readOnly}
+          />
         </div>
         <div className="input-group">
           <label className="smaller-text">
@@ -81,8 +74,8 @@ function ActivityForm({
             }
             placeholder="A definir"
             disabled={readOnly}
+            className="input-date"
           />
-          
         </div>
       </div>
       <div className="inputs-container">

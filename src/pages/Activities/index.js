@@ -4,7 +4,6 @@ import { Container, ListItem, ActivitiesContainer } from "./styles";
 import SectionHeader from "../../components/SectionHeader";
 
 import { Link } from "react-router-dom";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import CheckIcon from "@material-ui/icons/Check";
 import AddIcon from "@material-ui/icons/Add";
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import TextField from '@material-ui/core/TextField';
+import TextField from "@material-ui/core/TextField";
 
 export const Container = styled.div`
   display: grid;
@@ -10,7 +10,7 @@ export const Container = styled.div`
   .input-group,
   .textarea-group,
   .selection-group {
-    label {
+    .smaller-text {
       display: grid;
       grid-template-columns: min-content min-content;
       align-items: center;
@@ -36,7 +36,7 @@ export const Container = styled.div`
       justify-content: space-between;
 
       .select,
-      input {
+      .input-date {
         width: 5.5rem;
         height: 1.2rem;
         font-size: 0.8rem;
@@ -149,7 +149,7 @@ export const DateInput = styled(TextField)`
   text-align: center;
 
   input {
-    width: 10.5rem!important;
+    width: 10.5rem !important;
   }
 
   &::placeholder {
