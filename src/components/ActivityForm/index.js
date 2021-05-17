@@ -1,9 +1,13 @@
 import React from "react";
 
-import { Container, TagOption } from "./styles";
+import { Container, TagOption, DateInput } from "./styles";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
+
+// import TextField from '@material-ui/core/TextField';
+
+import InputDateTime from "../InputDateTime";
 
 import { ReactComponent as SubmissionDateIcon } from "../../assets/svgs/SubmissionDate.svg";
 import { ReactComponent as RealizationDateIcon } from "../../assets/svgs/RealizationDate.svg";
@@ -37,6 +41,10 @@ function ActivityForm({
       .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
   };
 
+  function onChange(timestamp) {
+    console.log(timestamp);
+  }
+
   return (
     <Container
       submissionDateFilled={readOnly ? true : submissionDateFilled}
@@ -47,13 +55,10 @@ function ActivityForm({
           <label className="smaller-text">
             <SubmissionDateIcon /> Data de Entrega:
           </label>
-          <input
-            className="submission-date-filled"
-            type="text"
+          <InputDateTime
             value={submissionDate}
-            onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
-            placeholder="A definir"
-            disabled={readOnly}
+            setValue={setSubmissionDate}
+            readOnly={readOnly}
           />
         </div>
         <div className="input-group">
@@ -69,6 +74,7 @@ function ActivityForm({
             }
             placeholder="A definir"
             disabled={readOnly}
+            className="input-date"
           />
         </div>
       </div>
