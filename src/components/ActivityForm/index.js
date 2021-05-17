@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, TagOption, DateInput } from "./styles";
+import { Container, TagOption } from "./styles";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -33,18 +33,6 @@ function ActivityForm({
 }) {
   const disciplines = ["Nenhuma", "OAC", "IHC", "CN"];
 
-  const formatInputDate = (value) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/(\d{2})(\d{2})/, "$1/$2")
-      .replace(/(\/\d{2})(\d{2})/, "$1/$2")
-      .replace(/\/(\d{2})(\d{2})\d?$/, " às $1:$2");
-  };
-
-  function onChange(timestamp) {
-    console.log(timestamp);
-  }
-
   return (
     <Container
       submissionDateFilled={readOnly ? true : submissionDateFilled}
@@ -59,22 +47,18 @@ function ActivityForm({
             value={submissionDate}
             setValue={setSubmissionDate}
             readOnly={readOnly}
+            additionalClass="submission-date-filled"
           />
         </div>
         <div className="input-group">
           <label className="smaller-text">
             <RealizationDateIcon /> Data de Realização:
           </label>
-          <input
-            className="realization-date-filled"
-            type="text"
+          <InputDateTime
             value={realizationDate}
-            onChange={(e) =>
-              setRealizationDate(formatInputDate(e.target.value))
-            }
-            placeholder="A definir"
-            disabled={readOnly}
-            className="input-date"
+            setValue={setRealizationDate}
+            readOnly={readOnly}
+            additionalClass="realization-date-filled"
           />
         </div>
       </div>

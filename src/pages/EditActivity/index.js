@@ -13,8 +13,8 @@ function EditActivity({ history }) {
   const { id } = useParams();
 
   const [name, setName] = useState("");
-  const [submissionDate, setSubmissionDate] = useState("");
-  const [realizationDate, setRealizationDate] = useState("");
+  const [submissionDate, setSubmissionDate] = useState(new Date());
+  const [realizationDate, setRealizationDate] = useState(new Date());
   const [associatedDiscipline, setAssociatedDiscipline] = useState("");
   const [activityType, setActivityType] = useState("Tarefa");
   const [description, setDescription] = useState("");

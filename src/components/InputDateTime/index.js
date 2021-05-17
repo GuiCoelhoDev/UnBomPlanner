@@ -6,16 +6,16 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener/";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
 
-import { format } from "date-fns";
+import { format, getYear } from "date-fns";
 
 import LongButton from "../LongButton";
 
-function InputDateTime({ readOnly, value, setValue }) {
+function InputDateTime({ readOnly, value, setValue, additionalClass }) {
   const [openPicker, setOpenPicker] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(1);
-  const [selectedHour, setSelectedHour] = useState(0);
-  const [selectedMinute, setSelectedMinute] = useState(1);
-  const [selectedMonth, setSelectedMonth] = useState(1);
+  const [selectedDay, setSelectedDay] = useState("5");
+  const [selectedHour, setSelectedHour] = useState("8");
+  const [selectedMinute, setSelectedMinute] = useState("0");
+  const [selectedMonth, setSelectedMonth] = useState("1");
 
   const months = [
     { value: 1, label: "Janeiro" },
@@ -59,6 +59,17 @@ function InputDateTime({ readOnly, value, setValue }) {
   };
 
   const closeModal = () => {
+    const year = getYear(new Date());
+
+    setValue(
+      new Date(
+        year,
+        selectedMonth - 1,
+        +selectedDay,
+        +selectedHour,
+        +selectedMinute
+      )
+    );
     setOpenPicker(!openPicker);
   };
 
@@ -66,12 +77,10 @@ function InputDateTime({ readOnly, value, setValue }) {
     <>
       <input
         type="text"
-        // value={submissionDate}
-        // onChange={(e) => setSubmissionDate(formatInputDate(e.target.value))}
         placeholder="A definir"
         onClick={readOnly ? () => {} : () => closeModal()}
-        value={format(value, "dd/MM 'às' hh':'mm")}
-        className="input-date"
+        value={value ? format(value, "dd/LL 'às' HH':'mm") : ""}
+        className={"input-date " + additionalClass}
         readOnly={true}
       />
       {openPicker ? (
@@ -87,6 +96,7 @@ function InputDateTime({ readOnly, value, setValue }) {
                 getOptionSelected={(option, selected) =>
                   option.value === selected.value
                 }
+                value={months[selectedMonth - 1]}
                 onChange={(e, v) => setSelectedMonth(v.value)}
                 renderInput={(params) => (
                   <TextField {...params} label="Mês" variant="outlined" />
@@ -97,6 +107,7 @@ function InputDateTime({ readOnly, value, setValue }) {
                 popupIcon={null}
                 options={monthDay(selectedMonth)}
                 getOptionLabel={(option) => option}
+                value={selectedDay}
                 onChange={(e, v) => setSelectedDay(v)}
                 renderInput={(params) => (
                   <TextField {...params} label="Dia" variant="outlined" />
@@ -107,6 +118,7 @@ function InputDateTime({ readOnly, value, setValue }) {
                 popupIcon={null}
                 options={hours()}
                 getOptionLabel={(option) => option}
+                value={selectedHour}
                 onChange={(e, v) => setSelectedHour(v)}
                 renderInput={(params) => (
                   <TextField {...params} label="Hora" variant="outlined" />
@@ -117,6 +129,7 @@ function InputDateTime({ readOnly, value, setValue }) {
                 popupIcon={null}
                 options={minutes()}
                 getOptionLabel={(option) => option}
+                value={selectedMinute}
                 onChange={(e, v) => setSelectedMinute(v)}
                 renderInput={(params) => (
                   <TextField {...params} label="Minuto" variant="outlined" />
