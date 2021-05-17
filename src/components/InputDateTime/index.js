@@ -94,10 +94,7 @@ function InputDateTime({ readOnly, value, setValue, additionalClass }) {
                 options={months}
                 getOptionLabel={(option) => option.label}
                 getOptionSelected={(option, selected) => 
-
-
                   option.value === selected.value
-                
                 }
                 value={months[selectedMonth - 1]}
 
