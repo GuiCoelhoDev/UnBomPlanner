@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.section`
   display: grid;
@@ -26,8 +26,16 @@ export const ContentContainer = styled.article`
   gap: 1rem;
 
   header {
+    ${({ titleFilled }) =>
+      titleFilled
+        ? css`
+            border-bottom: 2px dashed ${({ theme }) => theme.softBrown};
+          `
+        : css`
+            border-bottom: 2px dashed #e54a4a;
+          `}
+
     display: grid;
-    border-bottom: 2px dashed ${({ theme }) => theme.softBrown};
     padding-bottom: 0.35rem;
 
     .title-input {

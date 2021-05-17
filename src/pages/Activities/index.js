@@ -15,7 +15,34 @@ const Activities = ({ history }) => {
 
   const fetchActivities = async () => {
     const response = await index();
-    setActivities(response);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    let tempArray = response.filter((activity) => {
+      console.log(activity.value.realizationDate >= today);
+      return (
+        (activity.value.realizationDate >= today &&
+          activity.value.realizationDate < tomorrow) ||
+        (activity.value.submissionDate >= today &&
+          activity.value.submissionDate < tomorrow)
+      );
+    });
+    let temp2Array = response.filter((activity) => {
+      return (
+        !(
+          activity.value.realizationDate >= today &&
+          activity.value.realizationDate < tomorrow
+        ) ||
+        (activity.value.submissionDate >= today &&
+          activity.value.submissionDate < tomorrow)
+      );
+    });
+    console.log(temp2Array);
+    console.log(today, tempArray);
+    setTodayActivities(tempArray);
+    setActivities(temp2Array);
   };
 
   const checkActivity = async (id, isChecked) => {

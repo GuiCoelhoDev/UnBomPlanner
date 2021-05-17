@@ -18,6 +18,7 @@ function ShowActivity({ history }) {
     setLoading(true);
     const response = await show(id);
     setData(response);
+
     setLoading(false);
   }, [id]);
 

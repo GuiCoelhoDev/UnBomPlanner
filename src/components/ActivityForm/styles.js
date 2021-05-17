@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import TextField from "@material-ui/core/TextField";
 
 export const Container = styled.div`
   display: grid;
@@ -8,7 +10,7 @@ export const Container = styled.div`
   .input-group,
   .textarea-group,
   .selection-group {
-    label {
+    .smaller-text {
       display: grid;
       grid-template-columns: min-content min-content;
       align-items: center;
@@ -34,7 +36,7 @@ export const Container = styled.div`
       justify-content: space-between;
 
       .select,
-      input {
+      .input-date {
         width: 5.5rem;
         height: 1.2rem;
         font-size: 0.8rem;
@@ -55,6 +57,24 @@ export const Container = styled.div`
           outline: none;
           border: 1px solid #ffe7ce;
         }
+
+        &.submission-date-filled {
+          ${({ submissionDateFilled }) =>
+            submissionDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
+
+        &.realization-date-filled {
+          ${({ realizationDateFilled }) =>
+            realizationDateFilled
+              ? css``
+              : css`
+                  box-shadow: 0px 0 3px red;
+                `}
+        }
       }
 
       .select {
@@ -66,6 +86,7 @@ export const Container = styled.div`
           padding-top: 0.1rem;
         }
       }
+
       .Dropdown-menu {
         font-size: 0.8rem;
         border: none;
@@ -95,7 +116,7 @@ export const Container = styled.div`
 
   .textarea-group {
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content 1fr min-content;
     gap: 0.5rem;
 
     textarea {
@@ -112,6 +133,11 @@ export const Container = styled.div`
       &:focus {
         outline: none;
       }
+    }
+
+    .error-message {
+      font-size: 0.7rem;
+      color: #e54a4a;
     }
   }
 `;
@@ -131,5 +157,32 @@ export const TagOption = styled.span`
     color: ${({ theme }) => theme.darkBrown};
     font-weight: 400;
     background-color: ${({ tagColor }) => tagColor};
+  }
+`;
+
+export const DateInput = styled(TextField)`
+  width: 10.5rem;
+  height: 1.2rem;
+  font-size: 0.8rem;
+  background-color: #faf3ec;
+  padding: 0;
+  border-radius: 2px;
+  border: none;
+  color: ${({ theme }) => theme.darkerBrown};
+
+  text-align: center;
+
+  input {
+    width: 10.5rem !important;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.clearBrown};
+    font-weight: 300;
+  }
+
+  &:focus {
+    outline: none;
+    border: 1px solid #ffe7ce;
   }
 `;
